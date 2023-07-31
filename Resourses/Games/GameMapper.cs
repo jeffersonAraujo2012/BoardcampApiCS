@@ -9,5 +9,6 @@ public class GameMapper : Profile
   public GameMapper()
   {
     CreateMap<GameInputModel, Game>();
+    CreateMap<Game, GameViewModel>();
   }
 }

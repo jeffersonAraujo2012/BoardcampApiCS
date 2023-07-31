@@ -19,6 +19,14 @@ public class GamesController : ControllerBase
     _gamesService = gamesService;
   }
 
+  [HttpGet]
+  public async Task<ActionResult<List<GameViewModel>>> Get()
+  {
+    var games = await _gamesService.GetGames();
+    var gamesViewModels = games.Select(game => _mapper.Map<GameViewModel>(game));
+    return Ok(gamesViewModels);
+  }
+
   [HttpPost]
   public async Task<ActionResult> Post(GameInputModel gameModel)
   {
@@ -40,5 +48,4 @@ public class GamesController : ControllerBase
       return StatusCode(StatusCodes.Status500InternalServerError);
     }
   }
-
 }

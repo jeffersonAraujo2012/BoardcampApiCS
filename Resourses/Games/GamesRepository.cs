@@ -23,4 +23,9 @@ public class GamesRepository
     return await _context.Games
       .FirstOrDefaultAsync(game => game.Name.Equals(gameName));
   }
+
+  public async Task<List<Game>> GetGames()
+  {
+    return await _context.Games.ToListAsync();
+  }
 }

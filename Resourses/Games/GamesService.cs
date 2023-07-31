@@ -11,6 +11,12 @@ public class GamesService
   {
     _gamesRepository = gamesRepository;
   }
+
+  public async Task<List<Game>> GetGames()
+  {
+    return await _gamesRepository.GetGames();
+  }
+
   public async Task CreateGame(Game game)
   {
     var existingGame = await _gamesRepository.GetGameByName(game.Name);
