@@ -14,7 +14,7 @@ builder.Services.AddAutoMapper(typeof(GameMapper));
 builder.Services.AddScoped<GamesRepository>(); // Registrando o repositório
 builder.Services.AddScoped<GamesService>(); // Registrando o serviço
 
-string MySqlConnectionString = builder.Configuration.GetConnectionString("Default");
+string? MySqlConnectionString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

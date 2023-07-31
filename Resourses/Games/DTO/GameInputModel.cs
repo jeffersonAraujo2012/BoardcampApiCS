@@ -6,11 +6,11 @@ namespace BoardcampApiCS.Resourses.Games.DTO;
 public class GameInputModel {
   [Required]
   [StringLength(80, ErrorMessage = "O nome deve ter no máximo 80 caracteres")]
-  public string Name { get; set; }
+  public string Name { get; set; } = null!;
 
   [Required]
   [StringLength(300, ErrorMessage = "A URL da imagem deve ter no máximo 300 caracteres")]
-  public string Image { get; set; }
+  public string Image { get; set; } = null!;
 
   [Required]
   [Range(1,int.MaxValue, ErrorMessage = "O valor mínimo para StockTotal é 1")]
