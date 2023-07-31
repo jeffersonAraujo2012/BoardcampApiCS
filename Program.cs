@@ -11,8 +11,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(GameMapper));
-builder.Services.AddScoped<GamesRepository>(); // Registrando o repositório
-builder.Services.AddScoped<GamesService>(); // Registrando o serviço
 
 string? MySqlConnectionString = builder.Configuration.GetConnectionString("Default");
 
@@ -20,6 +18,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(MySqlConnectionString);
 });
+
+GamesExtends.ExtendsServices(builder.Services);
 
 var app = builder.Build();
 
