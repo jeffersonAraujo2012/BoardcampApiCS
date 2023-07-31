@@ -17,7 +17,7 @@ public class GameInputModel {
   public int StockTotal { get; set; }
 
   [Required]
-  [Range(0.01, decimal.MaxValue, ErrorMessage = "O valor deve ser no mínimo 0")]
+  [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser no mínimo 0")]
   [Column(TypeName = "decimal(10,2)")]
   public decimal PricePerDay { get; set; }
 }

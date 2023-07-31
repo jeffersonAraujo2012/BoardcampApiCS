@@ -27,7 +27,7 @@ public class GamesController : ControllerBase
     try
     {
       var game = _mapper.Map<Game>(gameModel);
-      await _gameService.CreateGame(game);
+      await _gamesService.CreateGame(game);
       return Created($"games/{game.Id}", game);
     }
     catch (Exception ex)
