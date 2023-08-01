@@ -1,6 +1,7 @@
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Customers.Dto;
 using BoardcampApiCS.Resourses.Customers.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BoardcampApiCS.Resourses.Customers;
 
@@ -19,5 +20,10 @@ public class CustomersService
     if (existingCustomer != null) throw new ConflictError("Conflict");
 
     return await _repository.CreateCustomer(customerModel);
+  }
+
+  public async Task<List<Customer>> GetCustomers()
+  {
+    return await _repository.GetCustomers();
   }
 }

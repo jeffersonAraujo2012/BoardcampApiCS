@@ -18,6 +18,13 @@ public class CustomersController : ControllerBase
     _service = service;
   }
 
+  [HttpGet]
+  public async Task<ActionResult<List<CustomerViewModel>>> Get() {
+    var customers = await _service.GetCustomers();
+    var customersView = customers.Select(c => _mapper.Map<CustomerViewModel>(c));
+    return Ok(customersView);
+  }
+
   [HttpPost]
   public async Task<ActionResult<CustomerViewModel>> Post(CustomerInputModel customerModel)
   {
