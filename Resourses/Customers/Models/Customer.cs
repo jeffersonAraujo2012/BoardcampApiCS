@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoardcampApiCS.Resourses.Customers.Models;
 
+[Index(nameof(Cpf), IsUnique = true)]
 public class Customer
 {
   public int Id { get; set; }
