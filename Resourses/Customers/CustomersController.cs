@@ -1,0 +1,29 @@
+using AutoMapper;
+using BoardcampApiCS.Resourses.Customers.Dto;
+using BoardcampApiCS.Resourses.Customers.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BoardcampApiCS.Resourses.Customers;
+
+[Route("[controller]")]
+[ApiController]
+public class CustomersController : ControllerBase
+{
+  private readonly IMapper _mapper;
+  private readonly CustomersService _service;
+  public CustomersController(IMapper mapper, CustomersService service)
+  {
+    _mapper = mapper;
+    _service = service;
+  }
+
+  [HttpPost]
+  public async Task<ActionResult<CustomerViewModel>> Post(CustomerInputModel customerModel)
+  {
+    var customer = _mapper.Map<Customer>(customerModel);
+    await _service.CreateCustomer(customer);
+    var customerView = _mapper.Map<CustomerViewModel>(customer);
+    return Created($"Customers/{customerView.Id}", customerView);
+  }
+}
