@@ -19,14 +19,16 @@ public class CustomersController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<ActionResult<List<CustomerViewModel>>> Get() {
+  public async Task<ActionResult<List<CustomerViewModel>>> Get()
+  {
     var customers = await _service.GetCustomers();
     var customersView = customers.Select(c => _mapper.Map<CustomerViewModel>(c));
     return Ok(customersView);
   }
 
   [HttpGet("{id:int}")]
-  public async Task<ActionResult<CustomerViewModel>> GetById(int id) {
+  public async Task<ActionResult<CustomerViewModel>> GetById(int id)
+  {
     var customer = await _service.GetCustomerById(id);
     return Ok(_mapper.Map<CustomerViewModel>(customer));
   }
@@ -38,5 +40,14 @@ public class CustomersController : ControllerBase
     await _service.CreateCustomer(customer);
     var customerView = _mapper.Map<CustomerViewModel>(customer);
     return Created($"Customers/{customerView.Id}", customerView);
+  }
+
+  [HttpPut("{id:int}")]
+  public async Task<ActionResult<CustomerViewModel>> Put(int id, CustomerInputModel customerMode)
+  { 
+    var customer = _mapper.Map<Customer>(customerMode);
+    customer.Id = id;
+    await _service.UpdateCustomer(id, customer);
+    return Ok(_mapper.Map<CustomerViewModel>(customer));
   }
 }

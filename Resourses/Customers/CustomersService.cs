@@ -29,9 +29,24 @@ public class CustomersService
 
   public async Task<Customer> GetCustomerById(int id)
   {
-    var customer = await _repository.GetCustomerById(id) ?? 
+    var customer = await _repository.GetCustomerById(id) ??
       throw new NotFoundError($"O cliente de id {id} não existe");
-    
+
     return customer;
+  }
+
+  public async Task UpdateCustomer(int id, Customer customer)
+  {
+    if(await _repository.GetCustomerById(id) is null)
+      throw new NotFoundError($"O cliente de id {id} não existe");
+
+    var existingCustomerWithSameCpf = await _repository.GetByCpf(customer.Cpf);
+
+    if (existingCustomerWithSameCpf?.Id != id && existingCustomerWithSameCpf != null) {
+      Console.WriteLine(existingCustomerWithSameCpf.Id);
+      throw new ConflictError("Conflito de CPF");
+    }
+
+    await _repository.UpdateCustomer(customer);
   }
 }
