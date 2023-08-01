@@ -25,6 +25,12 @@ public class CustomersController : ControllerBase
     return Ok(customersView);
   }
 
+  [HttpGet("{id:int}")]
+  public async Task<ActionResult<CustomerViewModel>> GetById(int id) {
+    var customer = await _service.GetCustomerById(id);
+    return Ok(_mapper.Map<CustomerViewModel>(customer));
+  }
+
   [HttpPost]
   public async Task<ActionResult<CustomerViewModel>> Post(CustomerInputModel customerModel)
   {

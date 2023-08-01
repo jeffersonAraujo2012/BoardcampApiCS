@@ -29,4 +29,9 @@ public class CustomersRepository
   {
     return await _context.Customers.ToListAsync();
   }
+
+  public async Task<Customer?> GetCustomerById(int id)
+  {
+    return await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+  }
 }

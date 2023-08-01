@@ -26,4 +26,12 @@ public class CustomersService
   {
     return await _repository.GetCustomers();
   }
+
+  public async Task<Customer> GetCustomerById(int id)
+  {
+    var customer = await _repository.GetCustomerById(id) ?? 
+      throw new NotFoundError($"O cliente de id {id} não existe");
+    
+    return customer;
+  }
 }

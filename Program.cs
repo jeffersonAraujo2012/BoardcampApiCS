@@ -60,6 +60,20 @@ app.UseExceptionHandler(appError =>
                 }.ToString());
                 return;
             }
+
+            if (exception.Error is NotFoundError)
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                await context.Response.WriteAsync(new ErrorDetailsViewModel()
+                {
+                    Message = exception.Error.Message,
+                    StatusCode = context.Response.StatusCode
+                }.ToString());
+                return;
+            }
+            
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Server Internal Error");
         }
     });
 });
