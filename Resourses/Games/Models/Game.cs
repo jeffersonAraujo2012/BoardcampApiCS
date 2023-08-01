@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -24,4 +25,5 @@ public class Game {
   [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser no mínimo 0")]
   [Column(TypeName = "decimal(10,2)")]
   public decimal PricePerDay { get; set; }
+  public ICollection<Game> Games { get; set; } = new List<Game>();
 }
