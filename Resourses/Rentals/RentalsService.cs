@@ -24,10 +24,18 @@ public class RentalsService
     _gamesRepository = gamesRepository;
     _customersRepository = customersRepository;
   }
+
+  public async Task<Rental> GetRentalByIdAsync(int id)
+  {
+    return await _repository.GetRentalByIdAsync(id) ?? 
+      throw new NotFoundError($"O aluguel de id {id} não existe");
+  }
+
   public async Task<List<Rental>> GetRentalsAsync()
   {
     return await _repository.GetRentalsAsync();
   }
+
   public async Task CreateRental(Rental rentalModel)
   {
     var game = await _gamesRepository.GetGameById(rentalModel.GameId) ??
@@ -46,6 +54,4 @@ public class RentalsService
     rentalModel.Customer = customer;
     rentalModel.Game = game;
   }
-
-
 }

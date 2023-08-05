@@ -12,6 +12,14 @@ public class RentalsRepository
     _context = context;
   }
 
+  public async Task<Rental?> GetRentalByIdAsync(int id)
+  {
+    return await _context.Rentals
+      .Include(r => r.Game)
+      .Include(r => r.Customer)
+      .FirstOrDefaultAsync(r => r.Id == id);
+  }
+
   public async Task<List<Rental>> GetRentalsAsync()
   {
     return await _context.Rentals

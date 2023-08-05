@@ -25,6 +25,13 @@ public class RentalsController : ControllerBase
     return Ok(rentalsViews);
   }
 
+  [HttpGet("{id:int}")]
+  public async Task<ActionResult<RentalViewModel>> GetById(int id)
+  {
+    var rental = await _service.GetRentalByIdAsync(id);
+    return Ok(_mapper.Map<RentalViewModel>(rental));
+  }
+
   [HttpPost]
   public async Task<ActionResult<RentalViewModel>> Post(AddRentalInputModel rentalModel)
   {
