@@ -3,6 +3,7 @@ using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Customers;
 using BoardcampApiCS.Resourses.Customers.Validators;
 using BoardcampApiCS.Resourses.Games;
+using BoardcampApiCS.Resourses.Rentals;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics;
@@ -30,6 +31,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 GamesExtends.ExtendsServices(builder.Services);
 CustomerExtensions.ExtendsServices(builder.Services);
+RentalExtensions.AddExtensions(builder.Services);
 
 var app = builder.Build();
 
@@ -64,6 +66,17 @@ app.UseExceptionHandler(appError =>
             if (exception.Error is NotFoundError)
             {
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
+                await context.Response.WriteAsync(new ErrorDetailsViewModel()
+                {
+                    Message = exception.Error.Message,
+                    StatusCode = context.Response.StatusCode
+                }.ToString());
+                return;
+            }
+
+            if (exception.Error is BadRequestError)
+            {
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync(new ErrorDetailsViewModel()
                 {
                     Message = exception.Error.Message,

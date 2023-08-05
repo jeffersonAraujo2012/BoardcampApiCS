@@ -28,4 +28,9 @@ public class GamesRepository
   {
     return await _context.Games.ToListAsync();
   }
+
+  public async Task<Game?> GetGameById(int id)
+  {
+    return await _context.Games.FirstOrDefaultAsync(game => game.Id == id);
+  }
 }
