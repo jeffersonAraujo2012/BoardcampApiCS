@@ -1,6 +1,7 @@
 using AutoMapper;
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Customers;
+using BoardcampApiCS.Resourses.Customers.Dto;
 using BoardcampApiCS.Resourses.Games;
 using BoardcampApiCS.Resourses.Rentals.Dto;
 using BoardcampApiCS.Resourses.Rentals.Models;
@@ -23,20 +24,27 @@ public class RentalsService
     _gamesRepository = gamesRepository;
     _customersRepository = customersRepository;
   }
+  public async Task<List<Rental>> GetRentalsAsync()
+  {
+    return await _repository.GetRentalsAsync();
+  }
   public async Task CreateRental(Rental rentalModel)
   {
     var game = await _gamesRepository.GetGameById(rentalModel.GameId) ??
       throw new BadRequestError($"O jogo de id {rentalModel.GameId} não existe.");
 
-    _ = await _customersRepository.GetCustomerById(rentalModel.CustomerId) ??
+    var customer = await _customersRepository.GetCustomerById(rentalModel.CustomerId) ??
       throw new BadRequestError($"O cliente de id {rentalModel.CustomerId} não existe.");
 
     var openRentals = await _repository.GetRentalsByGameIdWhereReturnNullAsync(rentalModel.GameId);
     if (openRentals.Count >= game.StockTotal) throw new BadRequestError("Estoque insuficiente");
 
-    rentalModel.OriginalPrice = rentalModel.DaysRented * (float) game.PricePerDay;
+    rentalModel.OriginalPrice = rentalModel.DaysRented * (float)game.PricePerDay;
 
     await _repository.CreateRental(rentalModel);
+
+    rentalModel.Customer = customer;
+    rentalModel.Game = game;
   }
 
 

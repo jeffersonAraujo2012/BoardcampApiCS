@@ -17,11 +17,20 @@ public class RentalsController : ControllerBase
     _mapper = mapper;
   }
 
+  [HttpGet]
+  public async Task<ActionResult<List<RentalViewModel>>> Get()
+  {
+    var rentals = await _service.GetRentalsAsync();
+    var rentalsViews = rentals.Select(r => _mapper.Map<RentalViewModel>(r));
+    return Ok(rentalsViews);
+  }
+
   [HttpPost]
-  public async Task<ActionResult<RentalViewModel>> Post(AddRentalInputModel rentalModel) {
+  public async Task<ActionResult<RentalViewModel>> Post(AddRentalInputModel rentalModel)
+  {
     var rental = _mapper.Map<Rental>(rentalModel);
     await _service.CreateRental(rental);
     var rentalView = _mapper.Map<RentalViewModel>(rental);
     return Created($"Rentals/{rental.Id}", rentalView);
-  } 
+  }
 }

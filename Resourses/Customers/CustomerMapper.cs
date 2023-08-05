@@ -11,5 +11,6 @@ public class CustomerMapper : Profile
     CreateMap<CustomerInputModel, Customer>();
     CreateMap<Customer, CustomerViewModel>()
       .ForMember(cvm => cvm.Birthday, options => options.MapFrom(c => c.Birthday.ToString("yyyy-MM-dd")));
+    CreateMap<Customer, CustomerSimpleViewModel>();
   }
 }

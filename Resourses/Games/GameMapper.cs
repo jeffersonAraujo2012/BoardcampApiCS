@@ -10,5 +10,6 @@ public class GameMapper : Profile
   {
     CreateMap<GameInputModel, Game>();
     CreateMap<Game, GameViewModel>();
+    CreateMap<Game, GameSimpleViewModel>();
   }
 }

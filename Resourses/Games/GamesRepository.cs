@@ -26,11 +26,11 @@ public class GamesRepository
 
   public async Task<List<Game>> GetGames()
   {
-    return await _context.Games.ToListAsync();
+    return await _context.Games.AsNoTracking().ToListAsync();
   }
 
   public async Task<Game?> GetGameById(int id)
   {
-    return await _context.Games.FirstOrDefaultAsync(game => game.Id == id);
+    return await _context.Games.AsNoTracking().FirstOrDefaultAsync(game => game.Id == id);
   }
 }
