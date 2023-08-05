@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using BoardcampApiCS.Resourses.Rentals.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardcampApiCS.Resourses.Customers.Models;
@@ -22,4 +23,6 @@ public class Customer
 
   [Required]
   public DateTime Birthday { get; set; }
+
+  public ICollection<Rental> Rentals = new List<Rental>();
 }

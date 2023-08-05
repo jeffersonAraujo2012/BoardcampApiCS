@@ -4,6 +4,7 @@ using BoardcampApiCS.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardcampApiCS.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230805140957_CustomerIdAddedtoRentalsTable")]
+    partial class CustomerIdAddedtoRentalsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,6 +67,9 @@ namespace BoardcampApiCS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -81,6 +87,8 @@ namespace BoardcampApiCS.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -128,6 +136,13 @@ namespace BoardcampApiCS.Migrations
                     b.ToTable("Rentals");
                 });
 
+            modelBuilder.Entity("BoardcampApiCS.Resourses.Games.Models.Game", b =>
+                {
+                    b.HasOne("BoardcampApiCS.Resourses.Games.Models.Game", null)
+                        .WithMany("Games")
+                        .HasForeignKey("GameId");
+                });
+
             modelBuilder.Entity("BoardcampApiCS.Resourses.Rentals.Models.Rental", b =>
                 {
                     b.HasOne("BoardcampApiCS.Resourses.Customers.Models.Customer", "Customer")
@@ -145,6 +160,11 @@ namespace BoardcampApiCS.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("BoardcampApiCS.Resourses.Games.Models.Game", b =>
+                {
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }
