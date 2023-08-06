@@ -11,7 +11,7 @@ public class RentalMapper : Profile
   {
     CreateMap<AddRentalInputModel, Rental>();
     CreateMap<Rental, RentalViewModel>()
-      .ForMember(rvm => rvm.RentDate, options => options.MapFrom(r => r.RentDate.ToString("yyyy-MM-dd")))
-      .ForMember(rvm => rvm.ReturnDate, options => options.MapFrom(r => r.ReturnDate != null ? r.ReturnDate.Value.ToString("yyyy-MM-dd") : null));
+      .ForMember(rvm => rvm.RentDate, options => options.MapFrom(r => r.RentDate.ToLocalTime().ToString("yyyy-MM-dd")))
+      .ForMember(rvm => rvm.ReturnDate, options => options.MapFrom(r => r.ReturnDate != null ? r.ReturnDate.Value.ToLocalTime().ToString("yyyy-MM-dd") : null));
   }
 }
