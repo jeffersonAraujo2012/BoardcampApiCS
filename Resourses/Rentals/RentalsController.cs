@@ -40,4 +40,11 @@ public class RentalsController : ControllerBase
     var rentalView = _mapper.Map<RentalViewModel>(rental);
     return Created($"Rentals/{rental.Id}", rentalView);
   }
+
+  [HttpPost("{id:int}/return")]
+  public async Task<IActionResult> ReturnRental(int id)
+  {
+    await _service.ReturnRentalAsync(id);
+    return NoContent();
+  }
 }

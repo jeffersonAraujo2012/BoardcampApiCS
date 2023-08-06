@@ -17,6 +17,7 @@ public class RentalsRepository
     return await _context.Rentals
       .Include(r => r.Game)
       .Include(r => r.Customer)
+      .AsNoTracking()
       .FirstOrDefaultAsync(r => r.Id == id);
   }
 
@@ -25,6 +26,7 @@ public class RentalsRepository
     return await _context.Rentals
       .Include(r => r.Game)
       .Include(r => r.Customer)
+      .AsNoTracking()
       .ToListAsync();
   }
 
@@ -38,6 +40,15 @@ public class RentalsRepository
   {
     return await _context.Rentals
       .Where(rental => rental.GameId == gameId && rental.ReturnDate == null)
+      .AsNoTracking()
       .ToListAsync();
+  }
+
+  public async Task ReturnRentalAsync(int id, float delayFee)
+  {
+    var rental = await _context.Rentals.FirstAsync(r => r.Id == id);
+    rental.ReturnDate = DateTime.UtcNow;
+    rental.DelayFee = delayFee;
+    await _context.SaveChangesAsync();
   }
 }

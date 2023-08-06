@@ -27,7 +27,7 @@ public class RentalsService
 
   public async Task<Rental> GetRentalByIdAsync(int id)
   {
-    return await _repository.GetRentalByIdAsync(id) ?? 
+    return await _repository.GetRentalByIdAsync(id) ??
       throw new NotFoundError($"O aluguel de id {id} não existe");
   }
 
@@ -53,5 +53,21 @@ public class RentalsService
 
     rentalModel.Customer = customer;
     rentalModel.Game = game;
+  }
+
+  public async Task ReturnRentalAsync(int id)
+  {
+    var rental = await _repository.GetRentalByIdAsync(id) ??
+      throw new NotFoundError($"O aluguel de id {id} não existe.");
+
+    if (rental.ReturnDate != null)
+      throw new BadRequestError($"O aluguel de id {id} já foi finalizado.");
+    
+    int delay = (DateTime.Now - rental.RentDate).Days - rental.DaysRented;
+    delay = delay < 0 ? 0 : delay;
+
+    float delayFee = delay * (float)rental.Game.PricePerDay;
+
+    await _repository.ReturnRentalAsync(id, delayFee);
   }
 }
