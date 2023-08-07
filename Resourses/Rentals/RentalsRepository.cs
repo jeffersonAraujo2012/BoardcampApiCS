@@ -51,4 +51,10 @@ public class RentalsRepository
     rental.DelayFee = delayFee;
     await _context.SaveChangesAsync();
   }
+
+  public async Task DeleteRentalAsync(Rental rental)
+  {
+    _context.Rentals.Remove(rental);
+    await _context.SaveChangesAsync();
+  }
 }

@@ -47,4 +47,11 @@ public class RentalsController : ControllerBase
     await _service.ReturnRentalAsync(id);
     return NoContent();
   }
+
+  [HttpDelete("{id:int}")]
+  public async Task<IActionResult> Delete(int id)
+  {
+    await _service.DeleteRentalAsync(id);
+    return NoContent();
+  }
 }

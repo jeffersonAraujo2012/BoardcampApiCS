@@ -62,12 +62,23 @@ public class RentalsService
 
     if (rental.ReturnDate != null)
       throw new BadRequestError($"O aluguel de id {id} já foi finalizado.");
-    
+
     int delay = (DateTime.Now - rental.RentDate).Days - rental.DaysRented;
     delay = delay < 0 ? 0 : delay;
 
     float delayFee = delay * (float)rental.Game.PricePerDay;
 
     await _repository.ReturnRentalAsync(id, delayFee);
+  }
+
+  public async Task DeleteRentalAsync(int id)
+  {
+    var rental = await _repository.GetRentalByIdAsync(id) ??
+      throw new NotFoundError($"O aluguel de id {id} não existe.");
+    
+    if (rental.ReturnDate is null) 
+      throw new BadRequestError("Não é possível deletar um aluguel em aberto.");
+
+    await _repository.DeleteRentalAsync(rental);
   }
 }
