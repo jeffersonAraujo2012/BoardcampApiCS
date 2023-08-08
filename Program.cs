@@ -1,5 +1,6 @@
 using BoardcampApiCS.Contexts;
 using BoardcampApiCS.Errors;
+using BoardcampApiCS.Migrations.AutoUpdate;
 using BoardcampApiCS.Resourses.Customers;
 using BoardcampApiCS.Resourses.Customers.Validators;
 using BoardcampApiCS.Resourses.Games;
@@ -90,6 +91,8 @@ app.UseExceptionHandler(appError =>
         }
     });
 });
+
+AutoUpdate.Run(app);
 
 app.UseHttpsRedirection();
 
