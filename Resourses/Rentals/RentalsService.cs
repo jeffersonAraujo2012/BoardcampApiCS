@@ -8,16 +8,17 @@ using BoardcampApiCS.Resourses.Rentals.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IIS.Core;
+using BoardcampApiCS.Resourses.Rentals.Interfaces;
 
 namespace BoardcampApiCS.Resourses.Rentals;
 
 public class RentalsService
 {
   private readonly IMapper _mapper;
-  private readonly RentalsRepository _repository;
+  private readonly IRentalsRepository _repository;
   private readonly IGamesRepository _gamesRepository;
   private readonly ICustomersRepository _customersRepository;
-  public RentalsService(RentalsRepository repository, IGamesRepository gamesRepository, ICustomersRepository customersRepository, IMapper mapper)
+  public RentalsService(IRentalsRepository repository, IGamesRepository gamesRepository, ICustomersRepository customersRepository, IMapper mapper)
   {
     _mapper = mapper;
     _repository = repository;

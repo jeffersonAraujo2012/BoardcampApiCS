@@ -1,3 +1,4 @@
+using BoardcampApiCS.Resourses.Rentals.Interfaces;
 using BoardcampApiCS.Resourses.Rentals.Validators;
 using FluentValidation;
 
@@ -7,7 +8,7 @@ public static class RentalExtensions
 {
   public static void AddExtensions(IServiceCollection services) {
     services.AddScoped<RentalsService>();
-    services.AddScoped<RentalsRepository>();
+    services.AddScoped<IRentalsRepository, RentalsRepository>();
     services.AddValidatorsFromAssemblyContaining<AddRentalValidator>();
     services.AddAutoMapper(typeof(RentalMapper));
   }

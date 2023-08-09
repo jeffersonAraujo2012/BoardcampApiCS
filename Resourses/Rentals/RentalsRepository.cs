@@ -1,10 +1,11 @@
 using BoardcampApiCS.Contexts;
+using BoardcampApiCS.Resourses.Rentals.Interfaces;
 using BoardcampApiCS.Resourses.Rentals.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardcampApiCS.Resourses.Rentals;
 
-public class RentalsRepository
+public class RentalsRepository : IRentalsRepository
 {
   private readonly AppDbContext _context;
   public RentalsRepository(AppDbContext context)
