@@ -9,13 +9,11 @@ namespace BoardcampApiCS.Resourses.Rentals;
 
 public class RentalsService
 {
-  private readonly IMapper _mapper;
   private readonly IRentalsRepository _repository;
   private readonly IGamesRepository _gamesRepository;
   private readonly ICustomersRepository _customersRepository;
-  public RentalsService(IRentalsRepository repository, IGamesRepository gamesRepository, ICustomersRepository customersRepository, IMapper mapper)
+  public RentalsService(IRentalsRepository repository, IGamesRepository gamesRepository, ICustomersRepository customersRepository)
   {
-    _mapper = mapper;
     _repository = repository;
     _gamesRepository = gamesRepository;
     _customersRepository = customersRepository;
