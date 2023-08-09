@@ -1,6 +1,6 @@
 using AutoMapper;
 using BoardcampApiCS.Errors;
-using BoardcampApiCS.Resourses.Customers;
+using BoardcampApiCS.Resourses.Customers.Interfaces;
 using BoardcampApiCS.Resourses.Customers.Dto;
 using BoardcampApiCS.Resourses.Games;
 using BoardcampApiCS.Resourses.Rentals.Dto;
@@ -16,8 +16,8 @@ public class RentalsService
   private readonly IMapper _mapper;
   private readonly RentalsRepository _repository;
   private readonly GamesRepository _gamesRepository;
-  private readonly CustomersRepository _customersRepository;
-  public RentalsService(RentalsRepository repository, GamesRepository gamesRepository, CustomersRepository customersRepository, IMapper mapper)
+  private readonly ICustomersRepository _customersRepository;
+  public RentalsService(RentalsRepository repository, GamesRepository gamesRepository, ICustomersRepository customersRepository, IMapper mapper)
   {
     _mapper = mapper;
     _repository = repository;

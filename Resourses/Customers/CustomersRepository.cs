@@ -1,12 +1,13 @@
 using BoardcampApiCS.Contexts;
 using BoardcampApiCS.Resourses.Customers.Dto;
+using BoardcampApiCS.Resourses.Customers.Interfaces;
 using BoardcampApiCS.Resourses.Customers.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardcampApiCS.Resourses.Customers;
 
-public class CustomersRepository
+public class CustomersRepository : ICustomersRepository
 {
   private readonly AppDbContext _context;
   public CustomersRepository(AppDbContext context)

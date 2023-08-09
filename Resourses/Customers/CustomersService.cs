@@ -1,5 +1,6 @@
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Customers.Dto;
+using BoardcampApiCS.Resourses.Customers.Interfaces;
 using BoardcampApiCS.Resourses.Customers.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,9 @@ namespace BoardcampApiCS.Resourses.Customers;
 
 public class CustomersService
 {
-  private readonly CustomersRepository _repository;
+  private readonly ICustomersRepository _repository;
 
-  public CustomersService(CustomersRepository repository)
+  public CustomersService(ICustomersRepository repository)
   {
     _repository = repository;
   }
