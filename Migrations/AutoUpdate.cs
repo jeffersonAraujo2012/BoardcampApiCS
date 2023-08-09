@@ -7,6 +7,8 @@ public static class AutoUpdate
 {
   public static void Run(IApplicationBuilder app)
   {
-    app.ApplicationServices.GetService<AppDbContext>()?.Database.Migrate();
+    using var scope = app.ApplicationServices.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
   }
 }
