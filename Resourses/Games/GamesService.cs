@@ -1,13 +1,14 @@
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Games.Models;
+using BoardcampApiCS.Resourses.Games.Interfaces;
 using Microsoft.AspNetCore.Components;
 
 namespace BoardcampApiCS.Resourses.Games;
 
 public class GamesService
 {
-  private readonly GamesRepository _gamesRepository;
-  public GamesService(GamesRepository gamesRepository)
+  private readonly IGamesRepository _gamesRepository;
+  public GamesService(IGamesRepository gamesRepository)
   {
     _gamesRepository = gamesRepository;
   }

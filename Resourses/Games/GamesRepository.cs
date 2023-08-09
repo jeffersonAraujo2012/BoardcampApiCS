@@ -1,10 +1,11 @@
 using BoardcampApiCS.Contexts;
+using BoardcampApiCS.Resourses.Games.Interfaces;
 using BoardcampApiCS.Resourses.Games.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardcampApiCS.Resourses.Games;
 
-public class GamesRepository
+public class GamesRepository : IGamesRepository
 {
   private readonly AppDbContext _context;
   public GamesRepository(AppDbContext context)
