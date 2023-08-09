@@ -1,7 +1,6 @@
 using AutoMapper;
 using BoardcampApiCS.Resourses.Rentals.Dto;
 using BoardcampApiCS.Resourses.Rentals.Models;
-using Microsoft.Extensions.Options;
 
 namespace BoardcampApiCS.Resourses.Rentals;
 

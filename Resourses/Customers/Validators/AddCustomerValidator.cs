@@ -1,4 +1,3 @@
-using System.Data;
 using BoardcampApiCS.Resourses.Customers.Dto;
 using FluentValidation;
 

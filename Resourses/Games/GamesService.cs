@@ -1,7 +1,6 @@
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Games.Models;
 using BoardcampApiCS.Resourses.Games.Interfaces;
-using Microsoft.AspNetCore.Components;
 
 namespace BoardcampApiCS.Resourses.Games;
 

@@ -1,13 +1,8 @@
 using AutoMapper;
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Customers.Interfaces;
-using BoardcampApiCS.Resourses.Customers.Dto;
 using BoardcampApiCS.Resourses.Games.Interfaces;
-using BoardcampApiCS.Resourses.Rentals.Dto;
 using BoardcampApiCS.Resourses.Rentals.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using BoardcampApiCS.Resourses.Rentals.Interfaces;
 
 namespace BoardcampApiCS.Resourses.Rentals;

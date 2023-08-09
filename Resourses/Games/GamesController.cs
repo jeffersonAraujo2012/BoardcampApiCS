@@ -1,6 +1,4 @@
 using AutoMapper;
-using BoardcampApiCS.Contexts;
-using BoardcampApiCS.Errors;
 using BoardcampApiCS.Resourses.Games.DTO;
 using BoardcampApiCS.Resourses.Games.Models;
 using Microsoft.AspNetCore.Mvc;

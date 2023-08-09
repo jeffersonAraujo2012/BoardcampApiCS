@@ -1,7 +1,6 @@
 using AutoMapper;
 using BoardcampApiCS.Resourses.Customers.Dto;
 using BoardcampApiCS.Resourses.Customers.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardcampApiCS.Resourses.Customers;
