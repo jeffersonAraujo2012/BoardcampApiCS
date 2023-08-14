@@ -4,9 +4,10 @@ using FluentValidation;
 
 namespace BoardcampApiCS.Resourses.Rentals;
 
-public static class RentalExtensions 
+public static class RentalExtensions
 {
-  public static void AddExtensions(IServiceCollection services) {
+  public static void AddRentalServices(this IServiceCollection services)
+  {
     services.AddScoped<RentalsService>();
     services.AddScoped<IRentalsRepository, RentalsRepository>();
     services.AddValidatorsFromAssemblyContaining<AddRentalValidator>();

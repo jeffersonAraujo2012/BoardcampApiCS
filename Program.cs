@@ -30,9 +30,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(MySqlConnectionString);
 });
 
-GamesExtends.ExtendsServices(builder.Services);
-CustomerExtensions.ExtendsServices(builder.Services);
-RentalExtensions.AddExtensions(builder.Services);
+builder.Services.AddGameServices();
+builder.Services.AddCustomerServices();
+builder.Services.AddRentalServices();
 
 var app = builder.Build();
 
