@@ -1,4 +1,6 @@
 using BoardcampApiCS.Resourses.Customers.Interfaces;
+using BoardcampApiCS.Resourses.Customers.Validators;
+using FluentValidation;
 
 namespace BoardcampApiCS.Resourses.Customers;
 
@@ -7,5 +9,6 @@ public static class CustomerExtensions {
     services.AddScoped<CustomersService>();
     services.AddScoped<ICustomersRepository, CustomersRepository>();
     services.AddAutoMapper(typeof(CustomerMapper));
+    services.AddValidatorsFromAssemblyContaining<AddCustomerValidator>();
   }
 }

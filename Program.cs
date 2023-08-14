@@ -2,10 +2,8 @@ using BoardcampApiCS.Contexts;
 using BoardcampApiCS.Errors;
 using BoardcampApiCS.Migrations.AutoUpdate;
 using BoardcampApiCS.Resourses.Customers;
-using BoardcampApiCS.Resourses.Customers.Validators;
 using BoardcampApiCS.Resourses.Games;
 using BoardcampApiCS.Resourses.Rentals;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
-builder.Services.AddValidatorsFromAssemblyContaining<AddCustomerValidator>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
